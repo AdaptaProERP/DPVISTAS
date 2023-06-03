@@ -1,0 +1,15 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	PERVIS_DEFINE	SELECT                           
+DLI_CODSUC      AS RII_CODSUC,                          
+DLI_CODIGO      AS RII_CODIGO,                          
+SUM(DLI_COSVTA) AS RII_COSVTA,                  
+SUM(DLI_CANVTA) AS RII_CANVTA,                                  
+MIN(DLI_FECHA)  AS RII_DESDE,                          
+MAX(DLI_FECHA)  AS RII_HASTA,      
+FCH_DESDE       AS RII_FCHDES,        
+FCH_HASTA       AS RII_FCHHAS                              
+FROM                           
+VIEW_DPDIARIO_TRIMES                           
+INNER JOIN DPLIBINVDET ON DLI_FECHA>=FCH_DESDE AND DLI_FECHA<=FCH_HASTA                        
+WHERE DLI_COSVTA>0                          
+GROUP BY DLI_CODSUC,DLI_CODIGO,RII_FCHDES,RII_FCHHAS
+VIS_DSN	<MULTIPLE>VIS_FECHA	24/11/2017VIS_HORA	10:52:05VIS_INDICA	.F.VIS_NOMBRE	Libro de Inventario TrimestralVIS_PRGPRE	 VIS_TABLA	.F.VIS_TABLE	VIEW_DPDIARIO_TRIMESVIS_VISTA	DPLIBINVDET_TRI
