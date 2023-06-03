@@ -1,0 +1,9 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	STDVIS_DEFINE	SELECT                                 
+COD_DPTO AS TRA_CODDEP,                                
+SUM(SALARIO/IF(TIPO_NOM="S",1,30)) AS TRA_SALDIA,                      
+COUNT(*) AS TRA_CANTID                                
+FROM NMTRABAJADOR             
+WHERE CONDICION="A"                                
+GROUP BY COD_DPTO                                
+ORDER BY COD_DPTO
+VIS_DSN	<MULTIPLE>VIS_FECHA	07/11/2020VIS_HORA	00:53:38VIS_INDICA	.F.VIS_NOMBRE	Trabajadores por DepartamentoVIS_PRGPRE	 VIS_TABLA	.T.VIS_TABLE	NMTRABAJADORVIS_VISTA	NMTRABJXDEP

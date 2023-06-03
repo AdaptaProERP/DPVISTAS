@@ -1,0 +1,18 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.T.VIS_CODADD	PERVIS_DEFINE	SELECT PER_CODIGO AS RES_CODIGO,                              
+       PER_NOMBRE AS RES_NOMBRE,                      
+       CMI_FCHDIA AS RES_FECHA,                             
+IF(((dayofweek(CMI_FCHDIA) = "2") and (dayofweek(CMI_FCHMOV) > 0)),concat(min(CMI_HORA)," ",max(CMI_HORA)," (",COUNT(*),")"),"Disponible") AS Lunes,      
+if(((dayofweek(CMI_FCHDIA) = "3") and (dayofweek(CMI_FCHMOV) > 0)),concat(min(CMI_HORA)," ",max(CMI_HORA)," (",COUNT(*),")"),"Disponible") AS `Martes`,                              
+if(((dayofweek(CMI_FCHDIA) = "4") and (dayofweek(CMI_FCHMOV) > 0)),concat(min(CMI_HORA)," ",max(CMI_HORA)," (",COUNT(*),")"),"Disponible") AS Miercoles,                              
+if(((dayofweek(CMI_FCHDIA) = "5") and (dayofweek(CMI_FCHMOV) > 0)),concat(min(CMI_HORA)," ",max(CMI_HORA)," (",COUNT(*),")"),"Disponible") AS Jueves,                              
+if(((dayofweek(CMI_FCHDIA) = "6") and (dayofweek(CMI_FCHMOV) > 0)),concat(min(CMI_HORA)," ",max(CMI_HORA)," (",COUNT(*),")"),"Disponible") AS Viernes,                              
+if(((dayofweek(CMI_FCHDIA) = "7") and (dayofweek(CMI_FCHMOV) > 0)),concat(min(CMI_HORA)," ",max(CMI_HORA)," (",COUNT(*),")"),"Disponible") AS Sabado,                              
+if(((dayofweek(CMI_FCHDIA) = "1") and (dayofweek(CMI_FCHMOV) > 0)),concat(min(CMI_HORA)," ",max(CMI_HORA)," (",COUNT(*),")"),"Disponible") AS Domingo,                               
+CMI_FCHDIA AS CMI_FCHDIA                               
+        FROM         DPPERSONAL                               
+INNER JOIN VIEW_CALMOVINV  ON  DPPERSONAL.PER_CODIGO = VIEW_CALMOVINV.CMI_CODIGO                               
+                          OR  ISNULL(VIEW_CALMOVINV.CMI_CODIGO)                        
+WHERE PER_ACTIVO = 1 and PER_SEMANA = 1            
+GROUP BY PER_CODIGO,PER_NOMBRE,CMI_FCHDIA                               
+ORDER BY PER_CODIGO,CMI_DOW
+VIS_DSN	<MULTIPLE>VIS_FECHA	05/01/2016VIS_HORA	14:38:32VIS_INDICA	.F.VIS_NOMBRE	Resumen Semanal Diario de Tareas InternasVIS_PRGPRE	 VIS_TABLA	.F.VIS_TABLE	DPPERSONALVIS_VISTA	RESUMENSEMANAL

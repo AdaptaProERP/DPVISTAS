@@ -1,0 +1,11 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	STDVIS_DEFINE	SELECT         
+CODIGO,                              
+COD_DPTO                        AS TRA_CODDEP,        
+SALARIO/IF(TIPO_NOM="S",1,30)   AS TRA_SALDIA,          
+PORCENPRES                      AS TRA_PORCEN,          
+IF(PORCENPRES=0,0,(SALARIO*PORCENPRES/100)) AS TRA_MTOPRE,          
+SALARIO+IF(PORCENPRES=0,0,IF(PORCENPRES=0,0,(SALARIO*PORCENPRES/100))) AS TRA_SALPRE          
+FROM NMTRABAJADOR                                     
+WHERE CONDICION="A"                                                        
+ORDER BY CODIGO
+VIS_DSN	<MULTIPLE>VIS_FECHA	18/11/2020VIS_HORA	05:37:21VIS_INDICA	.F.VIS_NOMBRE	Sueldo Diario del Trabajador + Incidencia PrestacionesVIS_PRGPRE	NMCAMPOSADDVIS_TABLA	.T.VIS_TABLE	NMTRABAJADORVIS_VISTA	NMTRABJSLDIA

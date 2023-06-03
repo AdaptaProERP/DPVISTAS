@@ -1,0 +1,18 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	PERVIS_DEFINE	SELECT                           
+DOC_CODSUC       AS RDV_CODSUC,                                  
+DOC_SERFIS       AS RDV_SERFIS,                                    
+YEAR(DOC_FECHA)  AS RDV_YEAR,                                    
+MONTH(DOC_FECHA) AS RDV_MES,                                 
+DAY(DOC_FECHA)   AS RDV_DIA,                                
+DOC_NUMERO       AS RDV_DESDE,                                
+DOC_NUMFIS       AS RDV_HASTA,            
+MAX(DOC_FECHA)   AS RDV_FECHA,                                 
+SUM(DOC_BASNET*DOC_CXC) AS RDV_BASE,                                    
+SUM(DOC_MTOIVA*DOC_CXC) AS RDV_IVA,                                    
+SUM(DOC_NETO  *DOC_CXC) AS RDV_NETO,        
+SUM(DOC_MTOEXE*DOC_CXC) AS RDV_MTOEXE,                                                                
+COUNT(*)                AS RDV_RECCO                                    
+FROM DPDOCCLI                                     
+WHERE DOC_TIPDOC="RDV" AND DOC_TIPTRA="D"                                    
+GROUP BY DOC_CODSUC,DOC_SERFIS,DOC_FECHA
+VIS_DSN	<MULTIPLE>VIS_FECHA	19/04/2020VIS_HORA	12:25:23VIS_INDICA	.F.VIS_NOMBRE	Mensual de Resumen de Ventas DiarisVIS_PRGPRE	 VIS_TABLA	.F.VIS_TABLE	DPDOCCLIVIS_VISTA	RDVMENSUAL
