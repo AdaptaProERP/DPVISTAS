@@ -1,0 +1,10 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	PERVIS_DEFINE	SELECT DOC_NUMERO,DOC_TIPDOC,              
+IF(CBT_NUMERO IS NULL, "No posee Asiento Diferido",CBT_NUMERO) AS "Comprobante Diferido",                      
+IF(CBT_ACTUAL IS NULL, "No posee Asiento Diferido",IF(CBT_ACTUAL="S","Asiento Actualizado","Asiento no Actualizado")) AS "Comprobante Actualizado"                      
+       FROM         DPDOCPRO                      
+INNER JOIN DPTIPDOCPRO ON TDC_TIPO = DOC_TIPDOC                      
+LEFT  JOIN DPCBTE ON DOC_CBTNUM = CBT_NUMERO                      
+WHERE TDC_CONTAB = 1                      
+GROUP BY DOC_NUMERO,DOC_TIPDOC,CBT_NUMERO          
+ORDER BY DOC_NUMERO
+VIS_DSN	<MULTIPLE>VIS_FECHA	25/04/2020VIS_HORA	22:26:26VIS_INDICA	.F.VIS_NOMBRE	Documentos de Compras y ComprobantesVIS_PRGPRE	 VIS_TABLA	.F.VIS_TABLE	DPDOCPROVIS_VISTA	DPDOCCBTE
