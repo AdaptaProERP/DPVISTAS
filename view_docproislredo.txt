@@ -1,0 +1,24 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	STDVIS_DEFINE	SELECT                     
+RXP_CODSUC AS ISL_CODSUC,                    
+RXP_TIPDOC AS ISL_TIPDOC,                    
+RXP_CODIGO AS ISL_CODIGO,                    
+RXP_NUMDOC AS ISL_NUMDOC,                    
+DOC_FECHA  AS ISL_FECHA ,                    
+DOC_FCHDEC AS ISL_FCHDEC,                    
+RXP_DOCTIP AS ISL_DOCTIP,                    
+RXP_DOCNUM AS ISL_NUMRET,                    
+RXP_PORCEN AS ISL_PORCEN,                    
+DOC_ESTADO AS ISL_ESTADO,                    
+DOC_ACT    AS ISL_ACT,                    
+DOC_NUMPAR AS ISL_NUMPAR,                    
+DOC_CBTNUM AS ISL_CBTNUM                    
+FROM DPDOCPROISLR                    
+INNER JOIN DPDOCPRO ON                    
+RXP_CODSUC=DOC_CODSUC AND                    
+RXP_DOCTIP=DOC_TIPDOC AND                    
+RXP_CODIGO=DOC_CODIGO AND                    
+RXP_DOCNUM=DOC_NUMERO AND DOC_TIPTRA="D"                    
+WHERE DOC_TIPTRA="D"                    
+GROUP BY RXP_CODSUC,RXP_TIPDOC,RXP_CODIGO,RXP_DOCNUM                    
+ORDER BY RXP_CODSUC,RXP_TIPDOC,RXP_CODIGO,RXP_DOCNUM
+VIS_DSN	<MULTIPLE>VIS_FECHA	04/08/2020VIS_HORA	19:17:38VIS_INDICA	.F.VIS_NOMBRE	Retenciones ISLR Proveedores     (Estado)VIS_PRGPRE	 VIS_TABLA	.T.VIS_TABLE	DPDOCPROISLRVIS_VISTA	DOCPROISLREDO

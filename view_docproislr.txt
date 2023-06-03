@@ -1,0 +1,26 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	PERVIS_DEFINE	SELECT               
+RXP_CODSUC AS RET_CODSUC,                            
+RXP_TIPDOC AS RET_TIPDOC,                            
+RXP_CODIGO AS RET_CODIGO,                            
+RXP_NUMDOC AS RET_NUMERO,                            
+DOC_FECHA  AS RET_FECHA ,              
+DOC_FCHDEC AS RET_FCHDEC,    
+RXP_DOCTIP AS RET_DOCTIP,    
+RXP_DOCNUM AS RET_DOCNUM,                                         
+SUM(RXP_PORCEN)  AS RET_PORCEN ,                            
+COUNT(*)         AS RET_CUANTOS,                            
+MONTH(DOC_FECHA) AS RET_MES    ,          
+YEAR(DOC_FECHA)  AS RET_YEAR   ,       
+MONTH(DOC_FECHA) AS RET_MES_D  ,          
+YEAR(DOC_FECHA)  AS RET_YEAR_D ,          
+SUM(RXP_MTORET)  AS RET_MONTO          
+FROM  DPDOCPROISLR            
+INNER JOIN DPDOCPRO ON             
+RXP_CODSUC=DOC_CODSUC AND             
+RXP_TIPDOC=DOC_TIPDOC AND            
+RXP_CODIGO=DOC_CODIGO AND            
+RXP_NUMDOC=DOC_NUMERO                            
+WHERE 1=1                          
+GROUP BY RXP_CODSUC,RXP_TIPDOC,RXP_CODIGO,RXP_DOCNUM                            
+ORDER BY RXP_CODSUC,RXP_TIPDOC,RXP_CODIGO,RXP_DOCNUM
+VIS_DSN	<MULTIPLE>VIS_FECHA	19/01/2020VIS_HORA	10:00:42VIS_INDICA	.F.VIS_NOMBRE	Retenciones de ISLR Documentos ProveedorVIS_PRGPRE	 VIS_TABLA	.T.VIS_TABLE	DPDOCPROISLRVIS_VISTA	DOCPROISLR

@@ -1,0 +1,19 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	PERVIS_DEFINE	SELECT RTI_CODSUC AS RTI_CODSUC,                                                
+RTI_CODIGO AS RTI_CODIGO,                                                
+RTI_TIPDOC AS RTI_TIPDOC,                                                
+RTI_DOCNUM AS RTI_NUMERO,                                                
+RTI_NUMERO AS RTI_NUMDOC,                                         
+RTI_PORCEN AS RTI_PORCEN,                                                
+DOC_NETO   AS RTI_MONTO ,                                                
+DOC_FCHDEC AS RTI_FCHDEC,                                                
+DOC_FECHA  AS RTI_FECHA ,                        
+DOC_ACT    AS RTI_ACT,                      
+RTI_NUMRET AS RTI_NUMRET                                                                   
+FROM  DPDOCPRORTI                                                
+INNER JOIN DPDOCPRO ON RTI_CODSUC=DOC_CODSUC AND                                                
+RTI_DOCTIP=DOC_TIPDOC AND                                                
+RTI_CODIGO=DOC_CODIGO AND                                                
+RTI_DOCNUM=DOC_NUMERO AND DOC_TIPTRA="D"                              
+WHERE DOC_ACT=1                                        
+ORDER BY RTI_CODSUC,RTI_TIPDOC,RTI_CODIGO,RTI_NUMDOC
+VIS_DSN	<Multiple>VIS_FECHA	07/10/2022VIS_HORA	05:33:07VIS_INDICA	.F.VIS_NOMBRE	Retenciones de IVA en Documentos de CompraVIS_PRGPRE	 VIS_TABLA	.T.VIS_TABLE	DPDOCPRORTIVIS_VISTA	DOCPRORTI

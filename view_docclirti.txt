@@ -1,0 +1,16 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	PERVIS_DEFINE	SELECT RTI_CODSUC AS RTI_CODSUC,                                    
+RTI_TIPDOC AS RTI_TIPDOC,                                    
+RTI_DOCNUM AS RTI_NUMERO,                                    
+RTI_NUMERO AS RTI_NUMDOC,                             
+RTI_PORCEN AS RTI_PORCEN,                                    
+DOC_NETO   AS RTI_MONTO ,                                    
+DOC_FECHA  AS RTI_FECHA ,                                   
+RTI_DOCTIP    
+FROM  DPDOCCLIRTI                                    
+INNER JOIN DPDOCCLI ON             
+RTI_CODSUC=DOC_CODSUC AND                                    
+RTI_DOCTIP=DOC_TIPDOC AND                                    
+RTI_DOCNUM=DOC_NUMERO AND DOC_TIPTRA="D"                  
+WHERE DOC_ACT=1                            
+ORDER BY RTI_CODSUC,RTI_TIPDOC,RTI_NUMDOC
+VIS_DSN	<MULTIPLE>VIS_FECHA	12/05/2020VIS_HORA	09:35:22VIS_INDICA	.F.VIS_NOMBRE	Retenciones de IVAVIS_PRGPRE	 VIS_TABLA	.T.VIS_TABLE	DPDOCCLIRTIVIS_VISTA	DOCCLIRTI
