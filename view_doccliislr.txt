@@ -1,0 +1,24 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	STDVIS_DEFINE	SELECT                     
+RXC_CODSUC AS RET_CODSUC,                                  
+RXC_TIPDOC AS RET_TIPDOC,                                  
+DOC_CODIGO AS RET_CODIGO,                                  
+RXC_NUMDOC AS RET_NUMERO,                                  
+DOC_FECHA  AS RET_FECHA ,                    
+RXC_DOCTIP AS RET_DOCTIP,         
+RXC_DOCNUM AS RET_DOCNUM,         
+SUM(RXC_PORCEN)  AS RET_PORCEN ,                                  
+COUNT(*)         AS RET_CUANTOS,                                  
+MONTH(DOC_FECHA) AS RET_MES    ,                
+YEAR(DOC_FECHA)  AS RET_YEAR   ,             
+MONTH(DOC_FECHA) AS RET_MES_D  ,                
+YEAR(DOC_FECHA)  AS RET_YEAR_D ,                
+SUM(RXC_MTORET)  AS RET_MONTO                
+FROM  DPDOCCLIISLR                  
+INNER JOIN DPDOCCLI ON                   
+RXC_CODSUC=DOC_CODSUC AND                   
+RXC_TIPDOC=DOC_TIPDOC AND                  
+RXC_NUMDOC=DOC_NUMERO                                  
+WHERE 1=1                                
+GROUP BY RXC_CODSUC,RXC_TIPDOC,RXC_DOCNUM                                  
+ORDER BY RXC_CODSUC,RXC_TIPDOC,RXC_DOCNUM
+VIS_DSN	<MULTIPLE>VIS_FECHA	27/02/2019VIS_HORA	06:46:14VIS_INDICA	.F.VIS_NOMBRE	Retenciones de IVA ISLRVIS_PRGPRE	 VIS_TABLA	.F.VIS_TABLE	DPDOCCLIISLRVIS_VISTA	DOCCLIISLR

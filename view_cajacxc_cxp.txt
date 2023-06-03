@@ -1,0 +1,18 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	STDVIS_DEFINE	SELECT                             
+CCC_CODSUC AS CAJ_CODSUC,                            
+CCC_CODCAJ AS CAJ_CODCAJ,                            
+CCC_RIF    AS CAJ_RIF   ,                            
+CCC_TIPO   AS CAJ_TIPO  ,                       
+CCC_NUMERO AS CAJ_NUMERO,                     
+CCC_MONTO  AS CAJ_MTOREC,                    
+IF(CCP_MONTO IS NULL,0,CCP_MONTO)  AS CAJ_MTOPAG,                    
+CCC_MONTO+IF(CCP_MONTO IS NULL,0,CCP_MONTO) AS CAJ_MONTO                         
+FROM VIEW_CAJACXC                            
+LEFT JOIN VIEW_CAJACXP ON CCC_CODSUC=CCP_CODSUC AND                         
+                          CCC_CODCAJ=CCP_CODCAJ AND                        
+                          CCC_RIF   =CCP_RIF    AND                        
+                          CCC_TIPO  =CCP_TIPO   AND                        
+                          CCC_NUMERO=CCP_NUMERO                     
+HAVING CAJ_MONTO>0                   
+ORDER BY CCC_CODSUC,CCC_CODCAJ,CCC_RIF,CCC_TIPO,CCC_NUMERO
+VIS_DSN	<MULTIPLE>VIS_FECHA	27/09/2016VIS_HORA	16:33:23VIS_INDICA	.F.VIS_NOMBRE	Cruce de Caja de CxC con CxPVIS_PRGPRE	 VIS_TABLA	.F.VIS_TABLE	VIEW_CAJACXCVIS_VISTA	CAJACXC_CXP

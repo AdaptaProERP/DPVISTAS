@@ -1,0 +1,21 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	STDVIS_DEFINE	SELECT                                                            
+MOV_CODSUC AS VTC_CODSUC,                                                                 
+MOV_LOTE   AS VTC_LOTE,                                              
+MOV_CODIGO AS VTC_CODIGO,                                                                  
+SUM(IF(DOC_DESTIN="N",MOV_PESO,0))  AS VTC_PESO,                                                                  
+SUM(IF(DOC_DESTIN="O",MOV_PESO,0))  AS VTC_PESOBS,                                                                
+SUM(IF(MOV_TIPASO="FAV",MOV_EXPORT,0)) AS VTC_PESFAC,                                    
+SUM(MOV_MTOCOM) AS DEC_MERMA,                                                
+SUM(IF(MOV_TIPASO="FAV",MOV_MTOCLA,0)) AS VTC_MTOFAC,                                                                                  
+SUM(IF(MOV_TIPASO="NRC",MOV_MTOCLA,0)) AS VTC_MTONRC,                                                                                    
+SUM(IF(MOV_TIPASO="NRC",MOV_EXPORT,0)) AS VTC_PESNRC,                              
+SUM(IF(MOV_TIPASO="FAV",MOV_MTODIV,0)) AS VTC_DIVFAC,                                                                                        
+SUM(IF(MOV_TIPASO="NRC",MOV_MTODIV,0)) AS VTC_DIVNRC,                      
+AVG(IF(MOV_TIPASO="FAV",MOV_MTOCLA/MOV_EXPORT,0)) AS VTC_PRECIO                                                                                 
+FROM DPMOVINV                                                                   
+INNER JOIN DPDOCCLI ON MOV_CODSUC=DOC_CODSUC AND MOV_TIPDOC=DOC_TIPDOC AND MOV_DOCUME=DOC_NUMERO                                                                  
+INNER JOIN DPCLIENTES ON CLI_CODIGO=DOC_CODIGO                    
+WHERE MOV_TIPDOC="NEN" AND MOV_LOTE<>"" AND MOV_INVACT=1 AND CLI_CODCLA<>"000002"                                                              
+GROUP BY VTC_CODSUC,VTC_CODIGO,VTC_LOTE                                          
+ORDER BY VTC_CODSUC,VTC_CODIGO,VTC_LOTE
+VIS_DSN	<MULTIPLE>VIS_FECHA	12/06/2020VIS_HORA	12:03:34VIS_INDICA	.F.VIS_NOMBRE	Entregas Clientes ComercializaciónVIS_PRGPRE	DPMOVINVSETMOVPESOVIS_TABLA	.F.VIS_TABLE	DPMOVINVVIS_VISTA	AVINENCLICLACOM

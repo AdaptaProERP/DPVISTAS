@@ -1,0 +1,17 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	STDVIS_DEFINE	SELECT                                             
+ MOV_CODSUC                 AS LFC_CODSUC,                                          
+ MOV_CODIGO                 AS LFC_CODIGO,                                                 
+ MOV_LOTE                   AS LFC_LOTE,                                                 
+ SUM(IF(CCP_PORCEN>0   ,MOV_MTOCLA,0))                      AS LFC_MTOCOB,                            
+ SUM(IF(CCP_PORCEN>=100,MOV_MTOCLA,0))                      AS LFC_COBPRO,                              
+ SUM(IF(CCP_PORCEN<100 ,MOV_MTOCLA*CCP_PORCEN/100,0))       AS LFC_MTOPEN,                                                
+ SUM(IF(CCP_PORCEN>=100,MOV_MTOCLA/DOC_VALCAM,0))           AS LFC_MTODIV,                              
+ SUM(MOV_MTOCLA-((MOV_MTOCLA/DOC_VALCAM)*CCP_PORCEN/100))   AS LFC_PENDIV,        
+ SUM(MOV_MTOCLA-(MOV_MTOCLA*CCP_PORCEN/100))                AS LFC_MTOCXC             
+ FROM DPMOVINV                                                 
+ INNER JOIN DPDOCCLI             ON DOC_CODSUC=MOV_CODSUC AND MOV_TIPASO=DOC_TIPDOC AND DOC_NUMERO=MOV_DOCASO AND DOC_TIPTRA="D" AND DOC_ACT=1                                   
+ LEFT  JOIN VIEW_DOCCLICXCPORCEN ON DOC_CODSUC=CCP_CODSUC AND DOC_TIPDOC=CCP_TIPDOC AND DOC_NUMERO=CCP_NUMERO                         
+ WHERE MOV_TIPDOC="NEN" AND MOV_TIPASO<>"" AND MOV_INVACT=1 AND MOV_LOTE<>""                                                 
+ GROUP BY MOV_CODIGO,MOV_LOTE            
+ ORDER BY MOV_CODIGO,MOV_LOTE
+VIS_DSN	<MULTIPLE>VIS_FECHA	29/02/2020VIS_HORA	11:44:25VIS_INDICA	.F.VIS_NOMBRE	Cobranza de Facturas Vinculadas con LotesVIS_PRGPRE	 VIS_TABLA	.T.VIS_TABLE	DPMOVINVVIS_VISTA	AVIFAVCOBLOTE

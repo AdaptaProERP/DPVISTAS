@@ -1,0 +1,15 @@
+VIS_ACTIVO	.T.VIS_ALTER	.F.VIS_AUTO	.F.VIS_CODADD	PERVIS_DEFINE	SELECT                                     
+CAJ_CODSUC AS CCP_CODSUC,                                    
+CAJ_CODCAJ AS CCP_CODCAJ,                                    
+PRO_RIF    AS CCP_RIF,                                    
+CAJ_TIPO   AS CCP_TIPO,                                    
+CAJ_NUMERO AS CCP_NUMERO,                                    
+SUM(CAJ_MONTO*CAJ_DEBCRE) AS CCP_MONTO                                    
+FROM DPCAJAMOV                                    
+INNER JOIN DPCAJAINST   ON DPCAJAMOV.CAJ_TIPO=ICJ_CODIGO AND ICJ_REQNUM=1 AND ICJ_INGRES=1 AND ICJ_EGRESO=1                                    
+INNER JOIN DPCBTEPAGO   ON CAJ_CODSUC=PAG_CODSUC AND CAJ_DOCASO=PAG_NUMERO AND PAG_ACT=1                                   
+INNER JOIN DPPROVEEDOR  ON PAG_CODIGO=PRO_CODIGO                                    
+WHERE CAJ_ORIGEN="PAG" AND CAJ_NUMERO<>"" AND CAJ_ACT=1                                    
+GROUP BY CAJ_CODSUC,CAJ_CODCAJ,PRO_RIF,CAJ_TIPO,CAJ_NUMERO                                    
+ORDER BY CAJ_CODSUC,CAJ_CODCAJ,PRO_RIF,CAJ_TIPO,CAJ_NUMERO
+VIS_DSN	<MULTIPLE>VIS_FECHA	27/09/2016VIS_HORA	22:48:31VIS_INDICA	.F.VIS_NOMBRE	Cruce Documento de CxC con CxPVIS_PRGPRE	 VIS_TABLA	.F.VIS_TABLE	DPCAJAMOVVIS_VISTA	CAJACXP
